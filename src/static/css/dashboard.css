@@ -1,0 +1,34 @@
+﻿.bloco-chamados {
+    margin-left: -23%;
+}
+
+.bloco {
+    width: 60%;
+    align-items: center;
+}
+
+img {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    width: 40%;
+}
+
+.sem-acesso {
+    text-align: center;
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 600px;
+    height: 100%;
+
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.img-blocked {
+    width: 100%;
+    padding: 4%;
+    height: 200px;
+}

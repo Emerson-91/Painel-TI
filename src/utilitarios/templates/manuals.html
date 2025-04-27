@@ -1,0 +1,73 @@
+﻿{% extends 'base.html' %}
+{% load static%}
+
+{% block title %}Manuais{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manuais</h2>
+    <p>Documentos e manuais disponíveis.</p>
+    
+    <div class="row">
+        <!-- Card abaris -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{% static 'images/Abaris.png' %}" class="card-img-top" alt="Abaris">
+                <div class="card-body">
+                    <h5 class="card-title">Abaris</h5>
+                    <p class="card-text">Configuração do Ábaris.</p>
+                    <a href="{% url 'manual_abaris' %}" class="btn btn-primary">Ver Manual</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card windows -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{% static 'images/windows.png' %}" class="card-img-top" alt="Windows">
+                <div class="card-body">
+                    <h5 class="card-title">PC</h5>
+                    <p class="card-text"> POP Computador.</p>
+                    <a href="{% url 'manual_pc' %}" class="btn btn-primary">Ver Manual</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 3cx -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{% static 'images/3cx.png' %}" class="card-img-top" alt="3cx">
+                <div class="card-body">
+                    <h5 class="card-title">3CX </h5>
+                    <p class="card-text">Configuracao 3CX.</p>
+                    <a href="{% url 'manual_3cx' %}" class="btn btn-primary">Ver Manual</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Impressoras-->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{% static 'images/impressoras.webp' %}" class="card-img-top" alt="Impressoras">
+                <div class="card-body">
+                    <h5 class="card-title">Impressoras</h5>
+                    <p class="card-text"> POP Impressoras.</p>
+                    <a href="{% url 'manual_impressoras' %}" class="btn btn-primary">Ver Manual</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Thinclients -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{% static 'images/thinclients.webp' %}" class="card-img-top" alt="3cx">
+                <div class="card-body">
+                    <h5 class="card-title">Thinclient </h5>
+                    <p class="card-text">Configuracao Thinclient</p>
+                    <a href="{% url 'manual_thinclient' %}" class="btn btn-primary">Ver Manual</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

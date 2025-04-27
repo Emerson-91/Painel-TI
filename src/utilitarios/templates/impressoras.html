@@ -1,0 +1,54 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Lista de Impressoras{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Impressoras</h2>
+    
+    <!-- Adicionar Nova Impressora -->
+    <a href="{% url 'cadastro_impressora' %}" class="btn btn-primary mb-3">Adicionar Nova Impressora</a>
+    <a href="{% url 'impressoras' %}" class="btn btn-info mb-3">Mostrar Todos</a>
+    <!-- Formulário de Busca -->
+    <form method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="imp" class="form-control" placeholder="Buscar por número do equipamento ou local" value="{{ request.GET.imp }}">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </form>
+
+    <!-- Tabela de Impressoras -->
+    <div class="tabela-responsive">
+        <table class="table tabela table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>IP</th>
+                    <th>Número do Equipamento</th>
+                    <th>Modelo</th>
+                    <th>Local</th>
+                    <th>Setor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for impressora in impressoras %}
+                <tr>
+                    <td data-title="IP"><a href="http://{{ impressora.ip }}" target="_blank">{{ impressora.ip }}</a></td>
+                    <td data-title="Nr Equipamento">{{ impressora.numero_equipamento }}</td>
+                    <td data-title="Modelo">{{ impressora.modelo }}</td>
+                    <td data-title="Local">{{ impressora.local.nome }}</td>  <!-- Acessando o nome do Local -->
+                    <td data-title="Setor">{{ impressora.departamento.nome }}</td> 
+                    <td>
+                        <a href="{% url 'editar_impressora' impressora.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">Nenhuma impressora cadastrada.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

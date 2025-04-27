@@ -1,0 +1,169 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Computador</h2>
+     <!-- Accordion Container -->
+    <div class="accordion" id="accordionExample">
+        <!-- Card 1 -->
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <u>Programas Departamentais</u>
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ol>
+                        <li>
+                            <strong>Criar atalho na área de trabalho conforme departamento:</strong>
+                            <ul>
+                                <li><strong>Secretaria:</strong>
+                                    <ul>
+                                        <li>\\192.168.6.247\fileserver_fs.arquivos.Secretaria\SUU_SEC.exe</li>
+                                        <li>\\192.168.6.247\fileserver_fs.arquivos.Secretaria\SUU_SEE.exe</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Pós:</strong>
+                                    <ul>
+                                        <li>\\192.168.6.247\fileserver_fs.arquivos.Secretaria\PosPresencial - Sistema\AcademicoSCA.exe</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Call Center:</strong>
+                                    <ul>
+                                        <li>\\192.168.6.247\fileserver_fs.arquivos.Secretaria\callcenter.exe</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Tesouraria:</strong>
+                                    <ul>
+                                        <li>\\192.168.6.247\fileserver_fs.arquivos.Tesouraria\SUU_TES.exe</li>
+                                        <li>\\192.168.6.247\fileserver_fs.arquivos.Tesouraria\SUU_DRC.exe</li>
+                                        <li>\\192.168.6.247\fileserver_fs.arquivos.Tesouraria\baixa_cg.exe</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Biblioteca:</strong>
+                                    <ul>
+                                        <li>\\192.168.6.247\fileserver_fs.arquivos.Biblioteca\biblus.exe</li>
+                                        <li><em>Necessário instalação do Firebird que consta na pasta: \\192.168.6.247\fileserver_fs.arquivos.Biblioteca\Firebird_Biblus</em></li>
+                                    </ul>
+                                </li>
+                                <li><strong>Huby Cursos:</strong>
+                                    <ul>
+                                        <li>\\192.168.6.247\fileserver_fs.arquivos.Metacursos\Administração Huby Cursos.exe</li>
+                                        <li><em>Necessário instalação do Firebird: Firebird-3.0.4.33054_0_x64_sgi.exe que consta na pasta do executável da Huby</em></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Verificar senha:</strong> Na planilha de senha, conforme patrimônio, e marcar flag para salvar senha.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <u>Procedimentos de Manutenção de Hardware</u>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ol>
+                        <li>Efetuar limpeza interna e externa;</li>
+                        <li>Verificar o patrimônio (parte superior do gabinete) e colocar durex protetor;</li>
+                        <li>Trocar pasta térmica do processador;</li>
+                        <li>Verificar fixação do HD (dois parafusos no mínimo), CDROM, Fonte e Cooler;</li>
+                        <li>Efetuar limpeza de memória com limpa contato e instalar no primeiro slot;</li>
+                        <li>Amarração dos cabos de alimentação com uma abraçadeira de nylon;</li>
+                        <li>Verificar conexão SATA, sendo o HD conectado sempre na primeira porta;</li>
+                        <li>Realizar o fechamento do gabinete sempre com todos os parafusos internos e externos;</li>
+                        <li>Por fim, executar o teste de HARDWARE (processador, memória e HD).</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <u>Passo a Passo para Configurar IPv4</u>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ol>
+                        <li>
+                            <strong>Abrir as Configurações de Rede:</strong>
+                            <ul>
+                                <li>Pressione <code>Win + R</code> para abrir a janela "Executar".</li>
+                                <li>Digite <code>ncpa.cpl</code> e pressione <code>Enter</code>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Selecionar a Conexão de Rede:</strong>
+                            <ul>
+                                <li>Na janela "Conexões de Rede", use as setas do teclado para selecionar sua interface de rede (ex.: Ethernet ou Wi-Fi).</li>
+                                <li>Pressione <code>Shift + F10</code> ou clique com o botão direito do mouse.</li>
+                                <li>No menu que aparece, selecione "Propriedades" (use as setas do teclado e pressione <code>Enter</code>).</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Configurar o Protocolo IPv4:</strong>
+                            <ul>
+                                <li>Na janela "Propriedades da Conexão de Rede", use <code>Tab</code> para navegar até a lista de itens.</li>
+                                <li>Use as setas para baixo até selecionar "Protocolo IP Versão 4 (TCP/IPv4)".</li>
+                                <li>Pressione <code>Enter</code> ou clique em "Propriedades".</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Definir o Endereço IPv4:</strong>
+                            <ul>
+                                <li>Selecione "Usar o seguinte endereço IP".</li>
+                                <li>Preencha os campos:
+                                    <ul>
+                                        <li><strong>Endereço IP:</strong> <code>192.168.1.100</code></li>
+                                        <li><strong>Máscara de Sub-rede:</strong> <code>255.255.255.0</code></li>
+                                        <li><strong>Gateway Padrão:</strong> <code>192.168.1.1</code></li>
+                                        <li><strong>Servidor DNS Preferencial:</strong> <code>8.8.8.8</code></li>
+                                        <li><strong>Servidor DNS Alternativo:</strong> <code>8.8.4.4</code></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Confirmar e Fechar:</strong>
+                            <ul>
+                                <li>Pressione <code>Enter</code> para confirmar as configurações e fechar a janela de propriedades do IPv4.</li>
+                                <li>Clique em "Fechar" ou pressione <code>Enter</code> na janela "Propriedades da Conexão de Rede".</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Testar a Conexão:</strong>
+                            <ul>
+                                <li>Abra o "Prompt de Comando" pressionando <code>Win + R</code>, digitando <code>cmd</code> e pressionando <code>Enter</code>.</li>
+                                <li>Digite <code>ping 8.8.8.8</code> e pressione <code>Enter</code> para verificar a conectividade.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</br>
+    <div class="text-end mb-3">
+        <a href="{% url 'manuals' %}" class="btn btn-info">Voltar</a>
+    </div>
+</div>
+{% endblock %}

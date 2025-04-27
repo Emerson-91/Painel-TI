@@ -1,0 +1,162 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>{% block title %}Helpdesk Dashboard{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    <!-- Preconnect para melhorar o desempenho -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Importação das fontes EB Garamond e Kanit -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="{% static 'css/base.css'%}" rel="stylesheet">
+    <link href="{% static 'css/chamados.css'%}" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css'%}" rel="stylesheet">
+    <link href="{% static 'css/responsivo.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js@latest"></script>
+
+</head>
+<body>
+    <!-- Menu superior -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{% url 'dashboard' %}">DI-Suporte</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse menu-topo" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dashboard' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'chamados' %}">Chamados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'relatorios' %}">Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'switches' %}">Switches</a>
+                </li>
+                <!-- Dropdown Utilitários -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="utilitariosDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Utilitários
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="utilitariosDropdown">
+                        <a class="dropdown-item" href="{% url 'impressoras' %}">Impressoras</a>
+                        <a class="dropdown-item" href="{% url 'ramais' %}">Ramais</a>
+                        <a class="dropdown-item" href="{% url 'lista_thinclients'%}">ThinClient</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'patrimonios' %}">Patrimônios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'manuals' %}">Manuais</a>
+                </li>
+                <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger nav-link">Sair</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Menu lateral -->
+    <div class="d-flex">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-black sidebar collapse">
+            <div class="position-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'abrir_chamado' %}">
+                            <i class="fas fa-plus"></i>
+                            Abrir Novo Chamado
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'chamados' %}">
+                            <i class="fas fa-tasks"></i>
+                            Chamados
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'relatorios' %}">
+                            <i class="fas fa-chart-bar"></i>
+                            Relatórios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'ping' %}">
+                            <i class="fas fa-wifi"></i>
+                            Status da Rede
+                        </a>
+                    </li>
+                    <!-- Dropdown Utilitários -->
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" id="utilitariosSidebar" role="button" data-toggle="collapse" data-target="#utilitariosMenu" aria-expanded="false" aria-controls="utilitariosMenu">
+                            <i class="fas fa-tools"></i>
+                            Utilitários
+                        </a>
+                        <div class="collapse" id="utilitariosMenu">
+                            <ul class="nav flex-column pl-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'impressoras' %}">
+                                        <i class="fas fa-print"></i>
+                                        Impressoras
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'ramais' %}">
+                                        <i class="fas fa-phone"></i>
+                                        Ramais
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'lista_thinclients'%}">
+                                        <i class="fas fa-server"></i>
+                                        ThinClient
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'patrimonios' %}">
+                            <i class="fas fa-server"></i>
+                            Patrimônios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'manuals' %}">
+                            <i class="fas fa-book"></i>
+                            Manuais
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'configuracoes' %}">
+                            <i class="fas fa-cog"></i>
+                            Configurações
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Conteúdo -->
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

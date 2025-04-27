@@ -1,0 +1,51 @@
+﻿{% extends 'base.html' %}
+{% block content %}
+<h2>Lista de ThinClients</h2>
+
+<a href="{% url 'criar_thinclient' %}" class="btn btn-primary mb-3">Adicionar ThinClient</a>
+<a href="{% url 'manual_thinclient'%}" class="btn btn-info mb-3">Manual de configuração</a>
+
+<!-- Formulário de busca -->
+<form method="get" action="{% url 'lista_thinclients' %}" class="mb-4">
+    <div class="input-group">
+        <label for="patrimonio" class="sr-only">Buscar por Patrimônio</label>
+        <input type="text" name="patrimonio" id="patrimonio" class="form-control" placeholder="Número do Patrimônio" value="{{ patrimonio_busca }}">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>
+
+<!-- Tabela de ThinClients -->
+<div class="tabela-responsive">
+    <table class="table tabela table-striped table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Patrimônio</th>
+                <th>Usuário</th>
+                <th>Senha</th>
+                <th>Número Monitor</th>
+                <th>Setor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for thinclient in thinclients %}
+            <tr>
+                <td data-title="Nr Patrimonio">{{ thinclient.patrimonio.numero_patrimonio }}</td>
+                <td data-title="Usuario">{{ thinclient.usuario }}</td>
+                <td data-title="Senha">{{ thinclient.senha }}</td>
+                <td data-title="Nr Monitor">{{ thinclient.numero_monitor }}</td>
+                <td data-title="Local">{{ thinclient.local }}</td>
+                <td>
+                    <a href="{% url 'editar_thinclient' thinclient.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'excluir_thinclient' thinclient.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">Nenhum ThinClient cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

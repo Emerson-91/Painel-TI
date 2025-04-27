@@ -1,0 +1,89 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Registrar Usuário{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h2>Registrar Usuário</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+
+                            <!-- Nome de Usuário -->
+                            <div class="form-group">
+                                <label for="{{ form.username.id_for_label }}">Nome de Usuário</label>
+                                <input type="text" name="username" id="{{ form.username.id_for_label }}" class="form-control" value="{{ form.username.value|default_if_none:'' }}">
+                                {% for error in form.username.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Nome -->
+                            <div class="form-group">
+                                <label for="{{ form.first_name.id_for_label }}">Nome</label>
+                                <input type="text" name="first_name" id="{{ form.first_name.id_for_label }}" class="form-control" value="{{ form.first_name.value|default_if_none:'' }}">
+                                {% for error in form.first_name.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Sobrenome -->
+                            <div class="form-group">
+                                <label for="{{ form.last_name.id_for_label }}">Sobrenome</label>
+                                <input type="text" name="last_name" id="{{ form.last_name.id_for_label }}" class="form-control" value="{{ form.last_name.value|default_if_none:'' }}">
+                                {% for error in form.last_name.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label for="{{ form.email.id_for_label }}">Email</label>
+                                <input type="email" name="email" id="{{ form.email.id_for_label }}" class="form-control" value="{{ form.email.value|default_if_none:'' }}">
+                                {% for error in form.email.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Senha -->
+                            <div class="form-group">
+                                <label for="{{ form.password.id_for_label }}">Senha</label>
+                                <input type="password" name="password" id="{{ form.password.id_for_label }}" class="form-control">
+                                {% for error in form.password.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Confirmar Senha -->
+                            <div class="form-group">
+                                <label for="{{ form.password_confirm.id_for_label }}">Confirme a Senha</label>
+                                <input type="password" name="password_confirm" id="{{ form.password_confirm.id_for_label }}" class="form-control">
+                                {% for error in form.password_confirm.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Grupos -->
+                            <div class="form-group">
+                                <label>Grupos</label> 
+                                {{ form.groups }} 
+                                {% for error in form.groups.errors %} 
+                                    <div class="text-danger">
+                                        {{ error }}
+                                    </div>
+                                 {% endfor %} 
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

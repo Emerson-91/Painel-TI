@@ -1,0 +1,59 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Configuração de Impressoras</h2>
+    <div class="text-end mb-3">
+        <a href="{% url 'manuals' %}" class="btn btn-info">Voltar</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><u>Catálogo de Endereço (Impressoras Samsung)</u></h5>
+            <ul class="list-unstyled">
+                <li>
+                    <strong>Acessar o Sistema:</strong> 
+                    <p>Abra o sistema “SyncThru” inserindo o IP da impressora na barra de endereços.</p>
+                </li>
+                <li>
+                    <strong>Login:</strong> 
+                    <p>Efetue login no sistema. Se o usuário e a senha não forem os padrões, basta ignorar o login. Caso não funcione nenhuma das opções, consulte o Douglas.</p>
+                </li>
+                <li>
+                    <strong>Adicionar Impressora:</strong>
+                    <p>Clique em "Catálogo de Endereço" e depois em "Adicionar".</p>
+                </li>
+                <li>
+                    <strong>Nome da Impressora:</strong> 
+                    <p>Utilize a nomenclatura “UC-XXXX” da máquina.</p>
+                </li>
+                <li>
+                    <strong>Configurações de SMB:</strong> 
+                    <p>Habilite a opção “Adicionar SMB”.</p>
+                </li>
+                <li>
+                    <strong>Endereço de Servidor SMB:</strong> 
+                    <p>Use o IP da máquina que será adicionada ao contato de digitalização da impressora.</p>
+                </li>
+                <li>
+                    <strong>Credenciais:</strong> 
+                    <p>Usuário: <strong>Administrador</strong>; Senha padrão do usuário Administrador.</p>
+                </li>
+                <li>
+                    <strong>Domínio:</strong> 
+                    <p>Use “UNIGRAN_CAPITAL”.</p>
+                </li>
+                <li>
+                    <strong>Caminho:</strong> 
+                    <p>Insira o caminho da pasta na máquina do usuário.</p>
+                </li>
+                <li>
+                    <strong>Teste:</strong> 
+                    <p>Após concluir todos os procedimentos, clique em “TESTE” para verificar se o procedimento foi realizado corretamente. Caso ocorra algum erro, verifique se não há erros nas configurações.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

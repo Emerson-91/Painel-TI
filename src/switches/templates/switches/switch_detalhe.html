@@ -1,0 +1,65 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Detalhes do Switch{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Detalhes do Switch: <strong>{{ switch.nome }}</strong></h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <p><strong>Local:</strong> {{ switch.local }}</p>
+            <p><strong>Número de Portas:</strong> {{ switch.numero_portas }}</p>
+            <p><strong>PoE:</strong> 
+                {% if switch.poe %}
+                    <span class="badge bg-success">Sim</span>
+                {% else %}
+                    <span class="badge bg-danger">Não</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <h2 class="mb-3">Portas:</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Porta</th>
+                <th>VLAN</th>
+                <th>Destino</th>
+                <th> Em uso </th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for porta in switch.portas.all %}
+                <tr>
+                    <td>{{ porta.numero_porta }}</td>
+                    <td>{{ porta.vlan }}</td>
+                    <td>{{ porta.destino }}</td>
+                    <td>
+                        {% if porta.em_uso %}
+                            <span class="badge bg-success">Sim</span>
+                        {% else %}
+                            <span class="badge bg-danger">Não</span>
+                        {% endif %}
+                     </td>
+                    <td>
+                        <a href="{% url 'editar_porta' porta.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Nenhuma porta cadastrada.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botão para cadastrar nova porta, passando o ID do switch -->
+    <div class="d-flex justify-content-start mt-4">
+        <a href="{% url 'switches' %}" class="btn btn-secondary">Voltar para a lista de switches</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+﻿{% extends 'base.html' %}
+{% load static%}
+
+{% block title %}403{% endblock %}
+
+{% block content %}
+<div class="sem-acesso">
+    <h1>Você não tem permissão para acessar esta página.</h1>
+    <div class="img-blocked">
+        <img src="{% static 'images/bloqueio.png' %}" alt="sem permissao">
+    </div>
+    <a href="{% url 'dashboard' %}">Voltar para a página inicial</a>
+</div>
+
+{% endblock %}

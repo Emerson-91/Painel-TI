@@ -1,0 +1,75 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<style>
+    a{ color: white}
+</style>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Lista de Patrimônios - DI Suporte</h2>
+
+    <a href="{% url 'cadastrar_patrimonio' %}" class="btn btn-success mb-3">Cadastrar Patrimônio</a>
+    <a href="{% url 'exportar_patrimonios_csv' %}" class="btn btn-warning mb-3">Exportar todos os dados</a> 
+    <a href="{% url 'exportar_computadores_csv' %}" class="btn btn-secondary mb-3">Exportar somente Computadores</a>
+
+    <!-- Formulário de busca -->
+    <form method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Buscar por tipo ou número de patrimônio" aria-label="Buscar por número de patrimônio" value="{{ query }}">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+        <div class="espacamento">   
+            <a href="{% url 'patrimonios' %}" class="btn btn-secondary">Mostrar Todos</a>
+        </div>
+    </form>
+    
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th><a href="?q={{ query }}&order_by=numero_patrimonio">Número</a></th>
+                <th><a href="?q={{ query }}&order_by=tipo">Tipo</a></th>
+                <th><a href="?q={{ query }}&order_by=local">Local</a></th>
+                <th><a href="?q={{ query }}&order_by=departamento__nome">Setor</a></th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patrimonio in patrimonios %}
+            <tr>
+                <td>{{ patrimonio.numero_patrimonio }}</td>
+                <td>{{ patrimonio.tipo }}</td>
+                <td>{{ patrimonio.local }}</td>
+                <td>{{ patrimonio.departamento }}</td>
+                <td>
+                    <a href="{% url 'visualizar_patrimonio' patrimonio.id %}" class="btn btn-info btn-sm">Visualizar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">Nenhum patrimônio cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Paginação -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if patrimonios.has_previous %}
+                <a href="?page=1&q={{ query }}&order_by={{ order_by }}">&laquo; primeira</a>
+                <a href="?page={{ patrimonios.previous_page_number }}&q={{ query }}&order_by={{ order_by }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ patrimonios.number }} de {{ patrimonios.paginator.num_pages }}.
+            </span>
+
+            {% if patrimonios.has_next %}
+                <a href="?page={{ patrimonios.next_page_number }}&q={{ query }}&order_by={{ order_by }}">próxima</a>
+                <a href="?page={{ patrimonios.paginator.num_pages }}&q={{ query }}&order_by={{ order_by }}">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}

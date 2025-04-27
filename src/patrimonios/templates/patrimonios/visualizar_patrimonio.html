@@ -1,0 +1,52 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Visualizar Patrimônio{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Detalhes do Patrimônio</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Número de Patrimônio:</strong> {{ patrimonio.numero_patrimonio }}</li>
+        <li class="list-group-item"><strong>Marca:</strong> {{ patrimonio.marca }}</li>
+        <li class="list-group-item"><strong>Tipo:</strong> {{ patrimonio.tipo }}</li>
+        <li class="list-group-item"><strong>Local:</strong> {{ patrimonio.local }}</li>
+        <li class="list-group-item"><strong>Departamento:</strong> {{ patrimonio.departamento }}</li>
+        <li class="list-group-item"><strong>Observação:</strong> {{ patrimonio.obs }}</li>
+        <li class="list-group-item"><strong>Memória RAM:</strong> {{ patrimonio.memoria_ram|default:"-" }}</li>
+        <li class="list-group-item"><strong>Armazenamento:</strong> {{ patrimonio.hd|default:"-" }}</li>
+        <li class="list-group-item"><strong>Processador:</strong> {{ patrimonio.processador|default:"-" }}</li>
+        <li class="list-group-item"><strong>Placa de Vídeo:</strong> {{ patrimonio.placa_video|default:"-" }}</li>
+        <!-- Adicionando os campos de Headset e Webcam -->
+        <li class="list-group-item"><strong>Possui Headset:</strong> {% if patrimonio.tem_headset %}Sim{% else %}Não{% endif %}</li>
+        <li class="list-group-item"><strong>Possui Webcam:</strong> {% if patrimonio.tem_webcam %}Sim{% else %}Não{% endif %}</li>
+    </ul>
+
+    <!-- Exibindo os ramais associados ao patrimônio -->
+    <h4 class="mt-4">Ramais Vinculados</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ramal</th>
+                <th>Usuário</th>
+                <th>Observações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ramal in ramais %}
+            <tr>
+                <td>{{ ramal.ramal }}</td>
+                <td>{{ ramal.usuario_ramal }}</td>
+                <td>{{ ramal.obs }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">Nenhum ramal vinculado a este patrimônio.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+    <a href="{% url 'editar_patrimonio' patrimonio.id %}" class="btn btn-warning mt-3">Editar</a>
+    <a href="{% url 'patrimonios' %}" class="btn btn-secondary mt-3">Voltar</a>
+</div>
+{% endblock %}

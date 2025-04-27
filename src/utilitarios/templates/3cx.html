@@ -1,0 +1,49 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">3CX</h2>
+    <div class="text-end mb-3">
+        <a href="{% url 'manuals' %}" class="btn btn-info mb-3">Voltar</a>
+        <a href="{% url 'ramais' %}" class="btn btn-info mb-3">Lista Ramais</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Instruções para Configurar o 3CX</h5>
+            <ol>
+                <li>
+                    <strong>Download do Software:</strong> Faça o download do software 3CX:
+                    <br>
+                    <a href="https://downloads.3cx.com/downloads/3CXPhone6.msi" target="_blank">Link para download</a>
+                </li>
+                <li>
+                    <strong>Configuração Inicial:</strong> 
+                    Após a instalação, clique em <strong>New Profile</strong> ou, se já estiver instalado, em <strong>Set Accounts</strong>. 
+                    Você verá a seguinte janela:
+                    <br>
+                    <!-- Imagem com link para Lightbox -->
+                    <a href="{% static 'images/3cxtela1.png' %}" data-lightbox="3cx" data-title="Configuração Inicial">
+                        <img src="{% static 'images/3cxtela1.png' %}" class="img-fluid" alt="Tela de Configuração Inicial">
+                    </a>
+                </li>
+                <li>
+                    <strong>Criar Novo Perfil:</strong> Clique em <strong>New</strong> e configure os dados na janela que aparecerá:
+                    <br>
+                    Preencha os dados conforme a aba <a href="{% url 'ramais'%}" ><strong>Ramais</strong> </a> no sistema ou na planilha de suporte.
+                    <br>
+                    <!-- Imagem com link para Lightbox -->
+                    <a href="{% static 'images/3cxtela2.png' %}" data-lightbox="3cx" data-title="Criar Novo Perfil">
+                        <img src="{% static 'images/3cxtela2.png' %}" class="img-fluid" alt="Criar Novo Perfil">
+                    </a>
+                </li>
+                <li>
+                    <strong>Teste: </strong> Após configurar, clique em Ok e teste o 3cx.
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

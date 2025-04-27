@@ -1,0 +1,77 @@
+﻿@media (max-width: 576px) {
+
+    .bloco-chamados {
+        margin-left: 10px;
+        margin-bottom: 0 !important;
+        padding: 1% !important;
+    }
+
+    .tabela,
+    .tabela-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tabela th,
+    .tabela td {
+        white-space: normal;
+        display: block;
+        text-align: left;
+        position: relative;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 400px;
+        padding-left: 35% !important;
+    }
+
+    .tabela th {
+        display: none;
+        /* Esconde os cabeçalhos originais */
+    }
+
+    .tabela td::before {
+        content: attr(data-title);
+        position: absolute;
+        left: 0;
+        width: 100%;
+        text-align: left;
+        font-weight: bold;
+        padding-left: 10px;
+    }
+
+    /* Ajuste para a descrição na tela pequena */
+    .descricao-mobil {
+        display: block;
+        /* Torna a célula visível */
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    /* Ajustes nos botões e filtros */
+    .mb-4 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+    }
+
+    .mb-4 a {
+        margin: 5px;
+        font-size: 14px;
+        /* Ajusta o tamanho da fonte */
+        padding: 5px 10px;
+        /* Ajusta o padding */
+    }
+}
+
+@media (min-width: 577px) {
+
+    /* Esconde a descrição em telas maiores */
+    .descricao-mobil {
+        display: none;
+        /* Torna a célula invisível */
+    }
+
+}

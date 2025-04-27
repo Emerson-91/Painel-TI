@@ -1,0 +1,71 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Editar Switch{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Switch</th>
+                <th>Número da Porta</th>
+                <th>VLAN</th>
+                <th>Destino</th>
+                <th>Localização</th>
+                <th>Em Uso</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for porta in portas %}
+            <tr>
+                <td>{{ porta.id }}</td>
+                <td>{{ porta.switch.nome }}</td>
+                <td>{{ porta.numero_porta }}</td>
+                <td>{{ porta.vlan }}</td>
+                <td>{{ porta.destino }}</td>
+                <td>{{ porta.localizacao }}</td>
+                <td>
+                    {% if porta.em_uso %}
+                        <span class="badge bg-success">Sim</span>
+                    {% else %}
+                        <span class="badge bg-danger">Não</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'editar_porta' porta.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .btn-success {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    .table th, .table td {
+        vertical-align: middle;
+    }
+    .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+    .thead-dark {
+        background-color: #343a40;
+        color: white;
+    }
+    .badge {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }
+    .btn-warning {
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}

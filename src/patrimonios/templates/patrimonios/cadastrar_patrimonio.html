@@ -1,0 +1,122 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Cadastro de Patrimônio{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Cadastrar Patrimônio</h2>
+    <form method="post" class="needs-validation bg-light p-4 rounded shadow-sm" novalidate>
+        {% csrf_token %}
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="id_numero_patrimonio" class="form-label">Número de Patrimônio</label>
+                {{ form.numero_patrimonio|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6">
+                <label for="id_marca" class="form-label">Marca</label>
+                {{ form.marca|add_class:"form-control" }}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="id_tipo" class="form-label">Tipo</label>
+                {{ form.tipo|add_class:"form-control form-select-lg" }}
+            </div>
+            <div class="col-md-6">
+                <label for="id_local" class="form-label">Local</label>
+                {{ form.local|add_class:"form-control form-select-lg" }}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="id_departamento" class="form-label">Departamento</label>
+                {{ form.departamento|add_class:"form-control form-select-lg" }}
+            </div>
+            <div class="col-md-6">
+                <label for="id_obs" class="form-label">Observação</label>
+                {{ form.obs|add_class:"form-control" }}
+            </div>
+        </div>
+
+        <!-- Campos adicionais para computador -->
+        <div id="computer-fields" style="display:none;">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="id_memoria_ram" class="form-label">Memória RAM</label>
+                    {{ form.memoria_ram|add_class:"form-control" }}
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="id_hd" class="form-label">Armazenamento</label>
+                    {{ form.hd|add_class:"form-control" }}
+                </div>
+                <div class="col-md-6">
+                    <label for="id_processador" class="form-label">Processador</label>
+                    {{ form.processador|add_class:"form-control" }}
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label for="id_placa_video" class="form-label">Placa de Vídeo</label>
+                    {{ form.placa_video|add_class:"form-control" }}
+                </div>
+            </div>
+            <!-- Campos para headset e webcam -->
+            <div class="row mb-3">
+                <div class="col-md-6 d-flex align-items-center">
+                    <div class="form-check">
+                        {{ form.tem_headset|add_class:"form-check-input" }}
+                        <label for="id_tem_headset" class="form-check-label ms-2">Possui Headset?</label>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <div class="form-check">
+                        {{ form.tem_webcam|add_class:"form-check-input" }}
+                        <label for="id_tem_webcam" class="form-check-label ms-2">Possui Webcam?</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const tipoSelect = document.getElementById('id_tipo');
+                const computerFields = document.getElementById('computer-fields');
+
+                // Função para mostrar/ocultar campos
+                function toggleComputerFields() {
+                    console.log("Valor selecionado:", tipoSelect.value);  // Para depuração
+                    if (tipoSelect.value === 'COMPUTADOR') { // Verifique se 'Computador' é o valor correto
+                        computerFields.style.display = 'block';
+                        // Limpa os campos se necessário
+                        document.getElementById('id_memoria_ram').value = '';
+                        document.getElementById('id_hd').value = '';
+                        document.getElementById('id_processador').value = '';
+                        document.getElementById('id_placa_video').value = '';
+                    } else {
+                        computerFields.style.display = 'none';
+                        // Preencher com "-"
+                        document.getElementById('id_memoria_ram').value = '-';
+                        document.getElementById('id_hd').value = '-';
+                        document.getElementById('id_processador').value = '-';
+                        document.getElementById('id_placa_video').value = '-';
+                    }
+                }
+
+                // Inicializa a exibição correta
+                toggleComputerFields();
+
+                // Adiciona evento de mudança ao seletor de tipo
+                tipoSelect.addEventListener('change', toggleComputerFields);
+            });
+        </script>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+</div>
+{% endblock %}

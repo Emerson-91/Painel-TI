@@ -1,0 +1,41 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Cadastro de Impressora{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Cadastro de Impressora</h2>
+    <form method="post" class="bg-light p-4 rounded shadow-sm">
+        {% csrf_token %}
+        
+        <div class="form-group mb-3">
+            <label for="id_ip" class="form-label">IP</label>
+            <input type="text" name="ip" id="id_ip" class="form-control" maxlength="15" placeholder="Ex: 192.168.0.1">
+        </div>
+        
+        <div class="form-group mb-3">
+            <label for="id_numero_equipamento" class="form-label">Número do Equipamento</label>
+            {{ form.numero_equipamento|add_class:"form-control" }}
+        </div>
+        
+        <div class="form-group mb-3">
+            <label for="id_modelo" class="form-label">Modelo</label>
+            {{ form.modelo|add_class:"form-control" }}
+        </div>
+        
+        <div class="form-group mb-3">
+            <label for="id_local" class="form-label">Local</label>
+            {{ form.local|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="id_departamento" class="form-label">Setor</label>
+            {{ form.departamento|add_class:"form-control" }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'impressoras' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

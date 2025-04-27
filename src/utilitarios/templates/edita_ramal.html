@@ -1,0 +1,54 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{% if form.instance.pk %}Editar Ramal{% else %}Cadastrar Ramal{% endif %}</h2>
+    <form method="post" class="bg-light p-4 rounded shadow-sm">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.usuario_ramal.id_for_label }}">{{ form.usuario_ramal.label }}</label>
+            {{ form.usuario_ramal|add_class:"form-control" }}
+            {% for error in form.usuario_ramal.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.senha.id_for_label }}">{{ form.senha.label }}</label>
+            {{ form.senha|add_class:"form-control" }}
+            {% for error in form.senha.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.patrimonio.id_for_label }}">{{ form.patrimonio.label }}</label>
+            {{ form.patrimonio|add_class:"form-control" }}
+            {% for error in form.patrimonio.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.ramal.id_for_label }}">{{ form.ramal.label }}</label>
+            {{ form.ramal|add_class:"form-control" }}
+            {% for error in form.ramal.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.obs.id_for_label }}">{{ form.obs.label }}</label>
+            {{ form.obs|add_class:"form-control" }}
+            {% for error in form.obs.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'ramais' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

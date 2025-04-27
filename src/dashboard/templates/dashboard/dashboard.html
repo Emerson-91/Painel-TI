@@ -1,0 +1,59 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div>
+        <div class="row">
+            <main role="main" class="col-md-12 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h2> {{saudacao}}, {{username}}!</h2>
+                </div>
+
+                <!-- Cards para métricas -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Total de Chamados</h5>
+                                <p class="card-text">{{ total_chamados }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-white bg-warning mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Chamados Abertos</h5>
+                                <p class="card-text">{{ chamados_abertos }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Chamados Fechados</h5>
+                                <p class="card-text">{{ chamados_fechados }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="nav-link btn-info text-center" href="{% url 'abrir_chamado' %}">
+                    <i class="fas fa-plus"></i>
+                    Abrir Novo Chamado
+                </a>
+                <!-- Lista de chamados Abertos -->
+                <div class="bloco-chamados margin-mob-chamados">
+                    {% include 'chamados/chamados.html' with chamados=chamados %}
+                </div>
+                
+                <!-- GRAFICOS DE CHAMADOS ENCERRADOS POR TECNICO -->
+                <div class="bloco">
+                    {% include 'chamados/grafico_tecnico.html' %}
+                </div>
+                
+            </main>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+{% endblock %}

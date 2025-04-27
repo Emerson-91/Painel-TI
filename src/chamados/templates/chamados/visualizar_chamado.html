@@ -1,0 +1,86 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Detalhes do Chamado{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+    <h2 class="mb-4">Detalhes do Chamado</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <tbody>
+                        <tr>
+                            <th class="table-active">Título</th>
+                            <td>{{ chamado.titulo }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Nr do Chamado</th>
+                            <td>{{ chamado.numero }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Departamento</th>
+                            <td>{{ chamado.departamento }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Local</th>
+                            <td>{{ chamado.local }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Contato</th>
+                            <td>{{ chamado.contato }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Descrição</th>
+                            <td>{{ chamado.descricao }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Status</th>
+                            <td><strong>{{ chamado.status }}</strong></td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Data de Criação</th>
+                            <td>{{ chamado.criado_em|date:"d/m/Y H:i" }}</td>
+                        </tr>
+
+                        {% if chamado.status == 'FECHADO' %}
+                        <tr>
+                            <th class="table-active">Data de Fechamento</th>
+                            <td>{{ chamado.encerrado_em|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Descrição Técnica</th>
+                            <td>{{ chamado.descricao_tecnica }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Solução Técnica</th>
+                            <td>{{ chamado.solucao_tecnica }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Patrimônio</th>
+                            <td>{{ chamado.nr_patrimonio }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-active">Resp. pelo encerramento</th>
+                            <td>{{ chamado.encerrado_por }}</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+                <a href="{% url 'chamados' %}" class="btn btn-voltar">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

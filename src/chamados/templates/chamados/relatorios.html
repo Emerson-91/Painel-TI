@@ -1,0 +1,141 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Relatórios</h2>
+    <form method="GET" action="{% url 'relatorios' %}">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="start_date">Data Inicial</label>
+                <input type="date" class="form-control" id="start_date" name="start_date" value="{{ request.GET.start_date }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="end_date">Data Final</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" value="{{ request.GET.end_date }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="tecnico">Técnico:</label>
+                <input type="text" name="tecnico" id="tecnico" value="{{ tecnico }}" class="form-control">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="numero_chamado">Número Chamado:</label>
+                <input type="text" name="numero_chamado" id="numero_chamado" value="{{ numero_chamado }}" class="form-control">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="patrimonio">Patrimônio:</label>
+                <input type="text" name="patrimonio" id="patrimonio" value="{{ patrimonio }}" class="form-control">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="titulo">Titulo de Chamado:</label>
+                <input type="text" name="titulo" id="titulo" value="{{ titulo }}" class="form-control">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="departamento">Setor:</label>
+                <input type="text" name="departamento" id="departamento" value="{{ departamento__nome }}" class="form-control">
+            </div>
+            <div class="form-group col-md-3 mt-auto">
+                <button type="submit" class="btn btn-primary btn-block">Filtrar</button>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12 d-flex">
+                <button type="submit" name="export_csv" value="1" class="btn btn-info mr-2">Exportar CSV</button>
+                <a href="{% url 'relatorios' %}?start_date={{ current_month_start|date:'Y-m-d' }}&end_date={{ current_month_end|date:'Y-m-d' }}" class="btn btn-secondary">Filtrar Mês Atual</a>
+            </div>
+        </div>
+    </form>
+    
+    <!-- Tabela de Chamados Filtrados -->
+    <div class="d-flex justify-content-between align-items-center my-4">
+        <h3 class="mr-3">Chamados Filtrados</h3>
+        <h5 class="mb-0">Total de Chamados Filtrados: {{ total_chamados }}</h5>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Título</th>
+                    <th>Status</th>
+                    <th>Setor</th>
+                    <th>Data de Criação</th>
+                    <th>Encerrado Por</th>
+                    <th>Visualizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chamado in chamados %}
+                    <tr>
+                        <td>{{ chamado.numero }}</td>
+                        <td>{{ chamado.titulo }}</td>
+                        <td>{{ chamado.status }}</td>
+                        <td>{{ chamado.departamento}} </td>
+                        <td>{{ chamado.criado_em|date:"d/m/Y H:i" }}</td>
+                        <td>{{ chamado.encerrado_por.username }}</td>
+                        <td><a href="{% url 'visualizar_chamado' chamado.id %}" class="btn btn-primary btn-sm">Ver Detalhes</a></td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">Nenhum chamado encontrado.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+<!-- Paginação -->
+<div class="pagination">
+    {% if chamados.has_other_pages %}
+        <ul class="pagination">
+            {% if chamados.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1&start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}&tecnico={{ tecnico }}&numero_chamado={{ numero_chamado }}&patrimonio={{ patrimonio }}&titulo={{ titulo }}">Primeira</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ chamados.previous_page_number }}&start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}&tecnico={{ tecnico }}&numero_chamado={{ numero_chamado }}&patrimonio={{ patrimonio }}&titulo={{ titulo }}">Anterior</a>
+                </li>
+            {% endif %}
+
+            {% for num in chamados.paginator.page_range %}
+                <li class="page-item {% if chamados.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}&start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}&tecnico={{ tecnico }}&numero_chamado={{ numero_chamado }}&patrimonio={{ patrimonio }}&titulo={{ titulo }}">{{ num }}</a>
+                </li>
+            {% endfor %}
+
+            {% if chamados.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ chamados.next_page_number }}&start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}&tecnico={{ tecnico }}&numero_chamado={{ numero_chamado }}&patrimonio={{ patrimonio }}&titulo={{ titulo }}">Próxima</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ chamados.paginator.num_pages }}&start_date={{ start_date|date:'Y-m-d' }}&end_date={{ end_date|date:'Y-m-d' }}&tecnico={{ tecnico }}&numero_chamado={{ numero_chamado }}&patrimonio={{ patrimonio }}&titulo={{ titulo }}">Última</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</div>
+
+
+    {% include 'chamados/grafico_tecnico.html'%}
+   <!-- Modal -->
+<div class="modal fade" id="detalhesModal" tabindex="-1" aria-labelledby="detalhesModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detalhesModalLabel">Detalhes do Chamado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- O conteúdo será carregado aqui via AJAX -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+</div>
+
+{% endblock %}

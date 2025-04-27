@@ -1,0 +1,41 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Editar Porta: <code>{{ porta.numero_porta }}</code> do Switch <code>{{switch.nome}}</code></h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <div class="col-md-6 form-group">
+                <label for="id_numero_porta" class="form-label">Número da Porta</label>
+                {{ form.numero_porta|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6 form-group">
+                <label for="id_vlan" class="form-label">VLAN</label>
+                {{ form.vlan|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="id_destino" class="form-label">Destino</label>
+                {{ form.destino|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6 form-group">
+                <label for="id_localizacao" class="form-label">Localização</label>
+                {{ form.localizacao|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form.em_uso|add_class:"form-check-input" }}
+                <label for="id_em_uso" class="form-label">Em Uso</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'switches' %}" class="btn btn-secondary">Voltar para a lista</a>
+    </form>
+</div>
+{% endblock %}
+

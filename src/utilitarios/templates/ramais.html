@@ -1,0 +1,49 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Lista de Ramais</h2>
+    <a href="{% url 'novo_ramal' %}" class="btn btn-primary mb-3">Cadastrar Ramal</a>
+    <a href="{% url 'manual_3cx' %}" class="btn btn-info mb-3">config 3cx</a>
+
+    <p class="text-end"><strong>IP Servidor: <code>192.168.6.254</code></strong></p>
+    <!-- Formulário de Busca -->
+    <form method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="ram" class="form-control" placeholder="Buscar por usuário ou número do ramal" value="{{ request.GET.ram }}">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    <div class="tabela-responsive">
+        <table class="table tabela table-striped table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Usuário</th>
+                    <th>Senha</th>
+                    <th>Ramal</th>
+                    <th>Patrimônio</th>
+                    <th>observação</th>
+                    <th>Ações</thata-title=>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ramal in ramais %}
+                <tr>
+                    <td data-title="Usuário">{{ ramal.usuario_ramal }}</td>
+                    <td data-title="Senha">{{ ramal.senha }}</td>
+                    <td data-title="Ramal">{{ ramal.ramal }}</td>
+                    <td data-title="Patrimônio">{{ ramal.patrimonio }}</td>
+                    <td data-title="obs">{{ ramal.obs }}</td>
+                    <td>
+                        <a href="{% url 'edita_ramal' ramal.id %}" class="btn btn-warning">Editar</a>
+                    </td>
+                </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">Nenhum Ramal cadastrado.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+</div>
+{% endblock %}

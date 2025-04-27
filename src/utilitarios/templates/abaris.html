@@ -1,0 +1,76 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Abaris</h2>
+    
+    <div class="accordion" id="accordionExample">
+        <!-- Card 1 -->
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <u>ÁBARIS – Unigran Capital</u>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ol>
+                        <li><strong>Executar o “Prompt de Comando”:</strong> como Administrador.</li>
+                        <li><strong>Executar arquivo bat:</strong> Execute o arquivo <code>Abaris link.rebootbat</code> que está no pendrive de suporte e na pasta: 
+                            <code>\\192.168.6.247\fileserver_fs.arquivos.Manut\Sistemas\Comandos</code>. 
+                            <em>Verifique no “C:\” se foi criado o atalho da pasta “abaris”.</em>
+                        </li>
+                        <li><strong>Abrir Pasta de Rede:</strong> Pressione <code>Windows+R</code> e digite: <code>\\192.168.3.250</code>.</li>
+                        <li><strong>Login:</strong> Digite o usuário: <code>ftp_abaris</code> e a senha: <code>N3$4xp!@35</code>. 
+                            <em>Marque a opção “Lembrar minhas credenciais”.</em>
+                        </li>
+                        <li><strong>Executar Aplicativo:</strong> Execute o arquivo <code>StoquePluginCapture.exe</code>.</li>
+                        <li><strong>Verificar Serviços:</strong> Acesse “Serviços” e verifique se o <code>Stoque.Abaris.Capture.Check.Service</code> está com a opção “Tipo de inicialização: Automático” e o “Status do serviço: Em execução”.</li>
+                        <li><strong>Criar Atalhos:</strong>
+                            <ul>
+                                <li>“Ábaris Capture” - link: <a href="https://unigran.capture.abaris.com.br/Account/Login.html" target="_blank">https://unigran.capture.abaris.com.br/Account/Login.html</a> para “Área de Trabalho”.</li>
+                                <li>“Ábaris Client” - link: <a href="https://unigran.abaris.com.br/Account/Login" target="_blank">https://unigran.abaris.com.br/Account/Login</a> para “Área de Trabalho”.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p><strong>Obs:</strong> Em caso de erro de Plugin, limpar Cache e Cookies do navegador e executar o passo 6 novamente.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <u>Erro ao exportar Documentos no Abaris Capture</u>
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ol>
+                        <li><strong>Abrir Explorer:</strong> Abra o Explorer (Win + E) e vá para o Disco C.</li>
+                        <li><strong>Renomear Documento:</strong> Renomeie o documento FTP LINK “Abaris” para “2 Abaris - Antigo”.</li>
+                        <li><strong>Usar Prompt de Comando:</strong> Abra o Prompt de Comando (CMD) e vá para a raiz usando o comando <code>cd..</code>.</li>
+                        <li><strong>Criar Link:</strong> Assim que estiver na raiz (C:\) digite o seguinte comando:
+                            <pre>mklink /d abaris \\192.168.3.250\Abaris\FileWatch\stoque\ftp_abaris</pre>
+                        </li>
+                        <li><strong>Reiniciar:</strong> Após isso, reinicie a máquina e faça um teste.</li>
+                        <li><strong>Alternativa:</strong> Execute o arquivo bat como ADM: <code>Abaris link.bat</code> que está no pendrive de suporte e na pasta: 
+                            <code>\\192.168.6.247\fileserver_fs.arquivos.Manut\Sistemas\Comandos</code>.
+                        </li>
+                    </ol>
+                    <p><strong>Arquivo Adicional:</strong> <a href="#" target="_blank">Clique aqui para baixar o arquivo</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="text-end mb-3">
+        <a href="{% url 'manuals' %}" class="btn btn-info">Voltar</a>
+    </div>
+</div>
+{% endblock %}

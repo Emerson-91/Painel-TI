@@ -1,0 +1,66 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Switches{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Switches</h2>
+    <a href="{% url 'cadastro_switch' %}" class="btn btn-primary mb-3">Cadastrar Novo Switch</a>
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    {{ form.local.label }}
+                    {{ form.local|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    {{ form.ip.label }}
+                    {{ form.ip|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-outline-primary mt-4">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <div class="tabela-responsive">
+        <table class="table tabela table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>IP</th>
+                    <th>Nome</th>
+                    <th>Modelo</th>
+                    <th>Portas</th>
+                    <th>POE</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for switch in switches %}
+                <tr>
+                    <td data-title="IP">{{ switch.ip }}</td>
+                    <td data-title="Nome">{{ switch.nome }}</td>
+                    <td data-title="Modelo">{{ switch.modelo }}</td>
+                    <td data-title="Nr de Portas">{{ switch.numero_portas }}</td>
+                    <td data-title="POE">
+                        {% if switch.poe %}
+                            <span class="badge bg-success">Sim</span>
+                        {% else %}
+                            <span class="badge bg-danger">Não</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'switch_detalhe' switch.id %}" class="btn btn-info btn-sm">Ver Detalhes</a>
+                        <a href="{% url 'editar_switch' switch.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+

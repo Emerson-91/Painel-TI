@@ -1,0 +1,148 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Configurações{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <main role="main" class="col-md-12 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Configurações</h1>
+                {% if messages %}
+                     <div class="alert alert-success">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-4">
+                <a href="{% url 'lista_logs_acesso' %}" class="btn btn-secondary btn-lg btn-block">Visualizar Log de acesso</a>
+            </div>
+            
+            <!-- Lista de Usuários -->
+            <h2>Lista de Usuários</h2>
+            <div class="card shadow-sm">
+                <!-- Adicionar usuário -->
+                <div class="mb-4">
+                    <a href="{% url 'register_user' %}" class="btn btn-primary btn-lg btn-block"><i class="fas fa-user"></i> Adicionar Usuário</a>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome de Usuário</th>
+                                <th>Nome Completo</th>
+                                <th>Email</th>
+                                <th>Grupos</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td class="text-center">{{ user.id }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.groups.all|join:", " }}</td>
+                                    <td class="text-center">
+                                        <a href="{% url 'edit_user' user.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                        <form action="{% url 'delete_user' user.id %}" method="post" style="display:inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Excluir</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </br>
+            
+            <!-- Lista de Departamentos -->
+            <h2>Lista de Departamentos</h2>
+            
+            <div class="card shadow-sm">
+                <!-- Adicionar Departamento -->
+                <div class="mb-4">
+                    <a href="{% url 'cadastrar_departamento' %}" class="btn btn-secondary btn-lg btn-block">Cadastrar Departamento</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome do Departamento</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for departamento in departamentos %}
+                                <tr>
+                                    <td class="text-center">{{ departamento.id }}</td>
+                                    <td>{{ departamento.nome }}</td>
+                                    <td class="text-center">{{ departamento.ativo|yesno:"Ativo,Inativo" }}</td>
+                                    <td class="text-center">
+                                        {% if departamento.ativo %}
+                                            <a href="{% url 'desativar_departamento' departamento.id %}" class="btn btn-warning btn-sm">Desativar</a>
+                                        {% else %}
+                                            <a href="{% url 'ativar_departamento' departamento.id %}" class="btn btn-success btn-sm">Ativar</a>
+                                        {% endif %}
+                                        <a href="{% url 'editar_departamento' departamento.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </br>
+        
+        <!-- Lista de Locais -->
+        <h2>Lista de Locais</h2>
+        <div class="card shadow-sm">
+            <!-- Cadastro de Locais -->
+            <div class="mb-4">
+                <a href="{% url 'cadastrar_local' %}" class="btn btn-secondary btn-lg btn-block">Cadastrar Local</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome do Local</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for local in locais %}
+                            <tr>
+                                <td class="text-center">{{ local.id }}</td>
+                                <td>{{ local.nome }}</td>
+                                <td class="text-center">{{ local.ativo|yesno:"Ativo,Inativo" }}</td>
+                                <td class="text-center">
+                                    {% if local.ativo %}
+                                        <a href="{% url 'desativar_local' local.id %}" class="btn btn-warning btn-sm">Desativar</a>
+                                    {% else %}
+                                        <a href="{% url 'ativar_local' local.id %}" class="btn btn-success btn-sm">Ativar</a>
+                                    {% endif %}
+                                    <a href="{% url 'editar_local' local.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </main>
+    </div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

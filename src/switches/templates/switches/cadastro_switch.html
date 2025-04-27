@@ -1,0 +1,49 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Cadastro de Switches{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Cadastro de Switches</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.nome.id_for_label }}">Nome</label>
+            {{ form.nome|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.modelo.id_for_label }}">Modelo</label>
+            {{ form.modelo|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.local.id_for_label }}">Local</label>
+            {{ form.local|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.ip.id_for_label }}">IP</label>
+            {{ form.ip|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.numero_portas.id_for_label }}">Número de Portas</label>
+            {{ form.numero_portas|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.poe.id_for_label }}">PoE</label>
+            <select class="form-control" name="poe" id="id_poe">
+                <option value="True" {% if form.poe.value == 'True' %}selected{% endif %}>Sim</option>
+                <option value="False" {% if form.poe.value == 'False' %}selected{% endif %}>Não</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+    <a href="{% url 'switches' %}" class="btn btn-secondary mt-3">Voltar para a lista de switches</a>
+</div>
+{% endblock %}

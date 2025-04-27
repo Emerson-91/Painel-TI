@@ -1,0 +1,68 @@
+﻿body {
+    padding-top: 54px;
+    font-family: 'Kanit', sans-serif;
+}
+
+/* MENU SUPERIOR */
+.navbar-dark.bg-dark {
+    background-color: #06192c !important;
+}
+
+/* MENU LATERAL*/
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 56;
+    left: 0;
+    z-index: 100;
+    width: 230px;
+    background-color: #06192c;
+    padding: 15px;
+}
+
+.sidebar .nav-link {
+    color: #ddd;
+}
+
+.sidebar .nav-link:hover {
+    color: #fff;
+}
+
+.espacamento {
+    padding-top: 1%;
+}
+
+.navbar {
+    padding: 10px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        background-color: #06192c;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+}
+
+
+
+/*  CARDS MANUAIS  */
+.card-img-top {
+    height: 200px;
+    /* Define uma altura fixa para as imagens */
+    object-fit: cover;
+    /* Faz com que a imagem cubra a área definida */
+}
+
+.rodape {
+    text-align: center;
+    align-items: center;
+    padding-bottom: 0;
+
+}

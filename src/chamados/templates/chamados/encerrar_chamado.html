@@ -1,0 +1,57 @@
+﻿{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Encerrar Chamado{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Encerrar Chamado</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <div class="col-md-6 form-group">
+                <label for="id_titulo" class="form-label">Título</label>
+                {{ form.titulo|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="id_numero" class="form-label">Nr Chamado</label>
+                {{ form.numero|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6 form-group">
+                <label for="id_departamento" class="form-label">Departamento</label>
+                {{ form.departamento|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="id_local" class="form-label">Local</label>
+                {{ form.local|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6 form-group">
+                <label for="id_contato" class="form-label">Contato</label>
+                {{ form.contato|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="id_nr_patrimonio" class="form-label">Número de Patrimônio</label>
+                {{ form.nr_patrimonio|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="id_descricao" class="form-label">Descrição</label>
+            {{ form.descricao|add_class:"form-control textarea-small" }}
+        </div>
+        <div class="form-group mb-3">
+            <label for="id_descricao_tecnica" class="form-label">Descrição Técnica</label>
+            {{ form.descricao_tecnica|add_class:"form-control textarea-small" }}
+        </div>
+        <div class="form-group mb-3">
+            <label for="id_solucao_tecnica" class="form-label">Solução Técnica</label>
+            {{ form.solucao_tecnica|add_class:"form-control textarea-small" }}
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'chamados' %}" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
+{% endblock %}

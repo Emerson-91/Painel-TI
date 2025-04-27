@@ -1,0 +1,114 @@
+﻿{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}Chamados{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Chamados</h2>
+        {% if messages %}
+            <div class="alert alert-success">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <!-- Filtros de STATUS dos CHAMADOS -->
+        <div class="mb-4">
+            <a href="{% url 'chamados' %}?status=ABERTO&quantidade={{ quantidade_por_pagina }}" class="btn btn-primary">Abertos</a>
+            <a href="{% url 'chamados' %}?status=FECHADO&quantidade={{ quantidade_por_pagina }}" class="btn btn-secondary">Encerrados</a>
+            <a href="{% url 'chamados' %}?quantidade={{ quantidade_por_pagina }}" class="btn btn-light">Todos</a>
+        </div>
+
+        <div class="mb-4">
+            <span>Mostrar:</span>
+            <a href="{% url 'chamados' %}?quantidade=10{% if status_filter %}&status={{ status_filter }}{% endif %}" class="btn btn-light {% if quantidade_por_pagina == 10 %}active{% endif %}">10</a>
+            <a href="{% url 'chamados' %}?quantidade=20{% if status_filter %}&status={{ status_filter }}{% endif %}" class="btn btn-light {% if quantidade_por_pagina == 20 %}active{% endif %}">20</a>
+            <a href="{% url 'chamados' %}?quantidade=all{% if status_filter %}&status={{ status_filter }}{% endif %}" class="btn btn-light {% if quantidade_por_pagina == 'all' %}active{% endif %}">Todos</a>
+        </div>
+        
+        <!-- Tabela de Chamados -->
+        <div class="tabela-responsive">
+            <table id="chamadosTable" class="table tabela table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Número</th>
+                        <th>Título</th>
+                        <th>Status</th>
+                        <th> Departamento solicitante</th>
+                        <th>Data de Criação</th>
+                        <th>Data de Encerramento</th>
+                        <th>Tempo de Resposta</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="chamadosTableBody">
+                    {% for chamado in chamados %}
+                        <tr class="{% if chamado.status == 'ABERTO' and chamado.tempo_criacao_minutos > 30 %}blink-row{% endif %}">
+                            <td data-title="Nr:">{{ chamado.numero }}</td>
+                            <td data-title="Titulo">
+                                <a href="{% url 'visualizar_chamado' chamado.id %}">
+                                    {{ chamado.titulo }}
+                                </a>
+                            </td>
+                            <td data-title="Status">{{ chamado.status }}</td>
+                            <td data-title="Setor">{{ chamado.departamento }}</td>
+                            <td data-title="Data criacao">{{ chamado.criado_em|date:"d/m/Y H:i" }}</td>
+                            <!-- Campo de Descrição (Somente no celular) -->
+                             <td class="descricao-mobil" data-title="Descrição">{{ chamado.descricao }}</td>
+                            {% if chamado.status == 'FECHADO'%}
+                                <td data-title="Data encerrado">{{ chamado.encerrado_em|date:"d/m/Y H:i" }}</td>
+                                <td data-title="tempo resposta">{{ chamado.tempo_resposta|format_timedelta }}</td>
+                            {% else %}
+                                <td> --  </td>
+                                <td> --  </td>
+                            {% endif %}
+                            <td>
+                                {% if chamado.status == 'ABERTO' %}
+                                    {% if is_tecnico or is_administrador %}
+                                        <a href="{% url 'encerrar_chamado' chamado.id %}" class="btn btn-3 btn-sep icon-heart">Encerrar</a>
+                                    {% else %}
+                                        <a href="{% url 'visualizar_chamado' chamado.id %}" class="btn btn-1 btn-sep icon-info">Visualizar</a>    
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{% url 'visualizar_chamado' chamado.id %}" class="btn btn-1 btn-sep icon-info">Visualizar</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8">Nenhum chamado encontrado.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Paginação -->
+        <div class="pagination">
+            {% if paginator.num_pages > 1 %}
+                <ul class="pagination">
+                    {% if page.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?pagina={{ page.previous_page_number }}&quantidade={{ quantidade_por_pagina }}{% if status_filter %}&status={{ status_filter }}{% endif %}">Anterior</a></li>
+                    {% endif %}
+
+                    {% for num in paginator.page_range %}
+                        <li class="page-item {% if page.number == num %}active{% endif %}">
+                            <a class="page-link" href="?pagina={{ num }}&quantidade={{ quantidade_por_pagina }}{% if status_filter %}&status={{ status_filter }}{% endif %}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if page.has_next %}
+                        <li class="page-item"><a class="page-link" href="?pagina={{ page.next_page_number }}&quantidade={{ quantidade_por_pagina }}{% if status_filter %}&status={{ status_filter }}{% endif %}">Próximo</a></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        // Recarrega a página a cada 30 segundos
+        setInterval(function() {
+            window.location.reload();
+        }, 30000); // 30 segundos = 30000 ms
+    </script>
+{% endblock %}

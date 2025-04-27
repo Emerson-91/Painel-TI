@@ -1,0 +1,24 @@
+﻿{% extends 'base.html' %}
+{%load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Thinclient</h2>
+    
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Instruções para Configurar Thinclient</h5>
+            <ol>
+                
+            </ol>
+
+            <strong> <a href="{% url 'lista_thinclients'%}"> visualizar na lista </a> </strong>
+        </div>
+    </div>
+</br>
+    <div class="text-end mb-3">
+        <a href="{% url 'manuals' %}" class="btn btn-info">Voltar</a>
+    </div>
+</div>
+{% endblock %}
