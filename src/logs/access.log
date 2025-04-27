@@ -9387,3 +9387,11 @@ INFO 2025-04-26 20:24:01,179 basehttp "GET / HTTP/1.1" 200 2145
 INFO 2025-04-26 20:24:05,870 basehttp "GET /static/css/login.css HTTP/1.1" 200 490
 WARNING 2025-04-26 20:24:07,037 log Not Found: /favicon.ico
 WARNING 2025-04-26 20:24:07,037 basehttp "GET /favicon.ico HTTP/1.1" 404 3467
+INFO 2025-04-26 20:24:55,600 basehttp "POST / HTTP/1.1" 302 0
+INFO 2025-04-26 20:24:56,189 basehttp "GET /dashboard/ HTTP/1.1" 200 22814
+INFO 2025-04-26 20:24:56,851 basehttp "GET /static/css/base.css HTTP/1.1" 200 975
+INFO 2025-04-26 20:24:56,876 basehttp "GET /static/css/dashboard.css HTTP/1.1" 200 435
+INFO 2025-04-26 20:24:56,877 basehttp "GET /static/css/responsivo.css HTTP/1.1" 200 1584
+INFO 2025-04-26 20:24:56,877 basehttp "GET /static/css/chamados.css HTTP/1.1" 200 2093
+INFO 2025-04-26 20:24:59,178 basehttp "GET /static/images/favicon.png HTTP/1.1" 200 1891
+INFO 2025-04-26 20:25:28,604 basehttp "GET /dashboard/ HTTP/1.1" 200 22814
