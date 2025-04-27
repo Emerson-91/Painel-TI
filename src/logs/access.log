@@ -9382,3 +9382,8 @@ INFO 2025-04-26 19:48:23,297 basehttp "GET /dashboard/ HTTP/1.1" 200 22816
 INFO 2025-04-26 19:48:53,632 basehttp "GET /dashboard/ HTTP/1.1" 200 22816
 INFO 2025-04-26 19:48:53,928 basehttp "GET /static/images/favicon.png HTTP/1.1" 200 1891
 INFO 2025-04-26 19:49:25,221 basehttp "GET /dashboard/ HTTP/1.1" 200 22816
+INFO 2025-04-26 20:23:52,371 autoreload Watching for file changes with StatReloader
+INFO 2025-04-26 20:24:01,179 basehttp "GET / HTTP/1.1" 200 2145
+INFO 2025-04-26 20:24:05,870 basehttp "GET /static/css/login.css HTTP/1.1" 200 490
+WARNING 2025-04-26 20:24:07,037 log Not Found: /favicon.ico
+WARNING 2025-04-26 20:24:07,037 basehttp "GET /favicon.ico HTTP/1.1" 404 3467
