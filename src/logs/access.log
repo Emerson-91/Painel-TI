@@ -9395,3 +9395,20 @@ INFO 2025-04-26 20:24:56,877 basehttp "GET /static/css/responsivo.css HTTP/1.1" 
 INFO 2025-04-26 20:24:56,877 basehttp "GET /static/css/chamados.css HTTP/1.1" 200 2093
 INFO 2025-04-26 20:24:59,178 basehttp "GET /static/images/favicon.png HTTP/1.1" 200 1891
 INFO 2025-04-26 20:25:28,604 basehttp "GET /dashboard/ HTTP/1.1" 200 22814
+INFO 2025-04-26 20:25:59,374 basehttp "GET /dashboard/ HTTP/1.1" 200 22814
+INFO 2025-04-26 20:26:29,727 basehttp "GET /dashboard/ HTTP/1.1" 200 22814
+INFO 2025-04-26 20:26:58,654 basehttp "GET /dashboard/chamados/?status=ABERTO&quantidade= HTTP/1.1" 200 11407
+INFO 2025-04-26 20:26:59,460 basehttp "GET /static/images/favicon.png HTTP/1.1" 200 1891
+INFO 2025-04-26 20:27:01,967 basehttp "GET /dashboard/chamados/?status=FECHADO&quantidade=10 HTTP/1.1" 200 24937
+INFO 2025-04-26 20:27:03,469 basehttp "GET /dashboard/chamados/?quantidade=10 HTTP/1.1" 200 24835
+INFO 2025-04-26 20:27:06,464 basehttp "GET /dashboard/chamados/?status=FECHADO&quantidade=10 HTTP/1.1" 200 24937
+INFO 2025-04-26 20:27:07,932 basehttp "GET /dashboard/chamados/?status=ABERTO&quantidade=10 HTTP/1.1" 200 11407
+INFO 2025-04-26 20:27:09,502 basehttp "GET /dashboard/ HTTP/1.1" 200 22814
+INFO 2025-04-26 20:27:13,726 basehttp "GET /dashboard/chamados/ HTTP/1.1" 200 24835
+WARNING 2025-04-26 20:27:13,995 log Not Found: /favicon.ico
+INFO 2025-04-26 20:27:16,234 basehttp "GET /dashboard/chamados/relatorios/ HTTP/1.1" 200 19004
+INFO 2025-04-26 20:27:18,780 basehttp "GET /switches/ HTTP/1.1" 200 10999
+WARNING 2025-04-26 20:27:19,188 log Not Found: /favicon.ico
+INFO 2025-04-26 20:27:22,104 basehttp "GET /patrimonios/ HTTP/1.1" 200 11552
+INFO 2025-04-26 20:27:24,656 basehttp "GET /patrimonios/visualizar/3/ HTTP/1.1" 200 9963
+INFO 2025-04-26 20:27:30,216 basehttp "GET /patrimonios/ HTTP/1.1" 200 11552
